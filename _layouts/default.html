@@ -29,7 +29,25 @@
 
 
 <main class="container">
+
+    {% if page.layout == "post" %}
+
+    <div class="article-meta">
+
+        <span>
+            ✍️ {{ site.author | default: "نویسنده" }}
+        </span>
+
+        <span>
+            📅 {{ page.date | date: "%Y/%m/%d" }}
+        </span>
+
+    </div>
+
+    {% endif %}
+
     {{ content }}
+
 </main>
 
 
