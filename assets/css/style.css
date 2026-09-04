@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
 * {
     box-sizing: border-box;
 }
@@ -6,7 +7,7 @@ body {
     margin: 0;
     background: #f8fafc;
     color: #1e293b;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
     line-height: 2;
 }
 
@@ -163,6 +164,136 @@ nav a:hover {
 
     nav a {
         font-size: 13px;
+    }
+
+}
+
+/* Article */
+
+.container {
+    width: min(850px, calc(100% - 40px));
+    margin: 50px auto;
+    background: white;
+    padding: 55px 65px;
+    border-radius: 16px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.04);
+}
+
+.container h1 {
+    font-size: 40px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    color: #0f172a;
+}
+
+.container h2 {
+    font-size: 28px;
+    margin-top: 55px;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+.container h3 {
+    font-size: 22px;
+    margin-top: 40px;
+    color: #1e293b;
+}
+
+.container p {
+    font-size: 18px;
+    line-height: 2.2;
+    color: #334155;
+}
+
+.container ul,
+.container ol {
+    font-size: 18px;
+    line-height: 2.2;
+    padding-right: 25px;
+}
+
+.container strong {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+
+/* Inline Code */
+
+.container code {
+    font-family: Consolas, monospace;
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+
+/* Code Block */
+
+.container pre {
+    direction: ltr;
+    text-align: left;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 22px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 30px 0;
+}
+
+.container pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+
+/* Blockquote */
+
+.container blockquote {
+    border-right: 4px solid #2563eb;
+    margin: 30px 0;
+    padding: 15px 25px;
+    background: #f8fafc;
+    color: #475569;
+    border-radius: 8px;
+}
+
+
+/* Links */
+
+.container a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: calc(100% - 20px);
+        margin: 20px auto;
+        padding: 30px 20px;
+    }
+
+    .container h1 {
+        font-size: 30px;
+    }
+
+    .container h2 {
+        font-size: 24px;
+        margin-top: 40px;
+    }
+
+    .container p,
+    .container ul,
+    .container ol {
+        font-size: 17px;
     }
 
 }
