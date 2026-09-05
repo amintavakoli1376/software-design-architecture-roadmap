@@ -1,137 +1,173 @@
 ---
 layout: default
-title: خانه
 ---
 
-<section class="hero">
+<article class="article-page">
 
-    <div class="hero-content">
+    <header class="article-header">
 
-        <p class="hero-label">
-            👋 سلام، من امین هستم
-        </p>
+        {% if page.categories %}
 
-        <h1>
-            درباره هوش مصنوعی،
-            مهندسی نرم‌افزار و داده می‌نویسم.
+        <div class="article-eyebrow">
+
+            {{ page.categories | first }}
+
+        </div>
+
+        {% endif %}
+
+
+        <h1 class="article-title">
+            {{ page.title }}
         </h1>
 
-        <p class="hero-description">
-            اینجا تجربیات، یادداشت‌ها و چیزهایی که در مسیر
-            یادگیری و کارم یاد می‌گیرم را منتشر می‌کنم.
+
+        {% if page.description %}
+
+        <p class="article-description">
+            {{ page.description }}
         </p>
 
-        <div class="hero-actions">
+        {% endif %}
 
-            <a href="{{ '/articles/' | relative_url }}" class="btn-primary">
-                مشاهده مقالات
-            </a>
+
+        <div class="article-meta">
+
+            <span>
+                {{ site.author }}
+            </span>
+
+            <span class="meta-separator">·</span>
+
+            <span>
+                {{ page.date | date: "%Y/%m/%d" }}
+            </span>
+
+            <span class="meta-separator">·</span>
+
+            <span>
+
+                {% assign words = content | number_of_words %}
+                {% assign reading_time = words | divided_by: 200 %}
+
+                {% if reading_time < 1 %}
+                    ۱
+                {% else %}
+                    {{ reading_time }}
+                {% endif %}
+
+                دقیقه مطالعه
+
+            </span>
 
         </div>
+
+
+        {% if page.tags %}
+
+        <div class="article-tags">
+
+            {% for tag in page.tags %}
+
+            <span class="article-tag">
+                #{{ tag }}
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </header>
+
+
+    {% if page.toc %}
+
+    <aside class="table-of-contents">
+
+        <div class="toc-title">
+            فهرست مطالب
+        </div>
+
+        <ul id="toc"></ul>
+
+    </aside>
+
+    {% endif %}
+
+
+    <div class="article-content">
+
+        {{ content }}
 
     </div>
 
-</section>
 
-
-<section class="topics">
-
-    <h2>موضوعات</h2>
-
-    <div class="topic-grid">
-
-        <div class="topic-card">
-            <span>🤖</span>
-            <h3>هوش مصنوعی</h3>
-            <p>
-                LLM، RAG، Machine Learning و تکنولوژی‌های AI
-            </p>
-        </div>
-
-        <div class="topic-card">
-            <span>🏗️</span>
-            <h3>مهندسی نرم‌افزار</h3>
-            <p>
-                Software Design، Architecture و Design Patterns
-            </p>
-        </div>
-
-        <div class="topic-card">
-            <span>📊</span>
-            <h3>داده</h3>
-            <p>
-                Data Analysis، SQL و مباحث مرتبط با داده
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="latest-articles">
-
-    <div class="section-header">
-
-        <h2>آخرین مقالات</h2>
+    <div class="article-back">
 
         <a href="{{ '/articles/' | relative_url }}">
-            مشاهده همه ←
+            ← بازگشت به همه مقالات
         </a>
 
     </div>
 
+</article>
 
-    <div class="articles-grid">
 
-        {% for post in site.posts limit:4 %}
+{% if page.toc %}
 
-        <article class="article-card">
+<script>
 
-            <div class="article-card-content">
+document.addEventListener("DOMContentLoaded", function () {
 
-                <h2>
-                    <a href="{{ post.url | relative_url }}">
-                        {{ post.title }}
-                    </a>
-                </h2>
+    const content =
+        document.querySelector(".article-content");
 
-                {% if post.description %}
-                <p>
-                    {{ post.description }}
-                </p>
-                {% endif %}
+    const toc =
+        document.querySelector("#toc");
 
-                {% if post.categories %}
-                <div class="article-category">
-                    {{ post.categories | first }}
-                </div>
-                {% endif %}
+    if (!content || !toc) return;
 
-                {% if post.tags %}
-                <div class="article-tags">
 
-                    {% for tag in post.tags %}
+    const headings =
+        content.querySelectorAll("h2, h3");
 
-                    <span class="article-tag">
-                        #{{ tag }}
-                    </span>
 
-                    {% endfor %}
+    headings.forEach(function (heading, index) {
 
-                </div>
-                {% endif %}
+        const id =
+            "section-" + index;
 
-                <a href="{{ post.url | relative_url }}" class="read-more">
-                    مطالعه مقاله ←
-                </a>
+        heading.id = id;
 
-            </div>
 
-        </article>
+        const li =
+            document.createElement("li");
 
-        {% endfor %}
+        if (heading.tagName === "H3") {
+            li.classList.add("toc-h3");
+        }
 
-    </div>
 
-</section>
+        const link =
+            document.createElement("a");
+
+        link.href =
+            "#" + id;
+
+        link.textContent =
+            heading.textContent;
+
+
+        li.appendChild(link);
+
+        toc.appendChild(li);
+
+    });
+
+});
+
+</script>
+
+{% endif %}
