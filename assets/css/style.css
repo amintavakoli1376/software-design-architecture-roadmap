@@ -386,3 +386,37 @@ nav a:hover {
 .article-content {
     font-size: 18px;
 }
+
+/* Table of Contents */
+
+.table-of-contents {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin: 30px 0 45px;
+}
+
+.table-of-contents h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+}
+
+.table-of-contents ul {
+    margin: 0;
+    padding-right: 20px;
+}
+
+.table-of-contents li {
+    margin: 6px 0;
+}
+
+.table-of-contents a {
+    color: #475569;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.table-of-contents a:hover {
+    color: #2563eb;
+}

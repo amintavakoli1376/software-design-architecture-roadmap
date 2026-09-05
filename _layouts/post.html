@@ -16,8 +16,53 @@ layout: default
 
     </header>
 
+
+    {% if page.toc %}
+    <aside class="table-of-contents">
+
+        <h2>فهرست مطالب</h2>
+
+        <ul id="toc"></ul>
+
+    </aside>
+    {% endif %}
+
+
     <div class="article-content">
         {{ content }}
     </div>
 
 </article>
+
+
+{% if page.toc %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const content = document.querySelector(".article-content");
+    const toc = document.querySelector("#toc");
+
+    if (!content || !toc) return;
+
+    const headings = content.querySelectorAll("h2, h3");
+
+    headings.forEach(function (heading, index) {
+
+        const id = "section-" + index;
+
+        heading.id = id;
+
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+
+        link.href = "#" + id;
+        link.textContent = heading.textContent;
+
+        li.appendChild(link);
+        toc.appendChild(li);
+
+    });
+
+});
+</script>
+{% endif %}
