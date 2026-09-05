@@ -8,6 +8,10 @@
     <title>{{ page.title }} | {{ site.title }}</title>
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>    
 </head>
 
 <body>
@@ -23,6 +27,10 @@
             <a href="{{ '/' | relative_url }}">خانه</a>
             <a href="{{ '/articles/' | relative_url }}">مقالات</a>
         </nav>
+
+        <button id="theme-toggle" class="theme-toggle" aria-label="تغییر تم">
+            🌙
+        </button>
 
     </div>
 </header>
@@ -54,6 +62,44 @@
 <footer class="site-footer">
     <p>© {{ 'now' | date: "%Y" }} — مقالات من</p>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        hljs.highlightAll();
+    });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const button = document.getElementById("theme-toggle");
+
+    if (!button) return;
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        button.textContent = "☀️";
+    }
+
+    button.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark-mode");
+
+        const isDark = document.body.classList.contains("dark-mode");
+
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
+
+        button.textContent = isDark ? "☀️" : "🌙";
+
+    });
+
+});
+</script>
 
 </body>
 </html>

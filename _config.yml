@@ -2,3 +2,6 @@ title: مقالات من
 description: مقالات من درباره هوش مصنوعی و مهندسی نرم‌افزار
 lang: fa
 author: امین توکلی
+collections:
+  categories:
+    output: true

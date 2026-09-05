@@ -14,10 +14,71 @@ layout: default
         </p>
         {% endif %}
 
+        <div class="article-info">
+
+            <span>
+                ✍️ {{ site.author | default: "نویسنده" }}
+            </span>
+
+            <span>
+                📅 {{ page.date | date: "%Y/%m/%d" }}
+            </span>
+
+            <span>
+                ⏱️
+                {% assign words = content | number_of_words %}
+                {% assign reading_time = words | divided_by: 200 %}
+
+                {% if reading_time < 1 %}
+                    1
+                {% else %}
+                    {{ reading_time }}
+                {% endif %}
+
+                دقیقه مطالعه
+            </span>
+
+        </div>
+
+
+        {% if page.categories or page.tags %}
+
+        <div class="article-taxonomy">
+
+            {% if page.categories %}
+
+            <span class="article-category">
+                {{ page.categories | first }}
+            </span>
+
+            {% endif %}
+
+
+            {% if page.tags %}
+
+            <div class="article-tags">
+
+                {% for tag in page.tags %}
+
+                <span class="article-tag">
+                    #{{ tag }}
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
     </header>
 
 
     {% if page.toc %}
+
     <aside class="table-of-contents">
 
         <h2>فهرست مطالب</h2>
@@ -25,18 +86,23 @@ layout: default
         <ul id="toc"></ul>
 
     </aside>
+
     {% endif %}
 
 
     <div class="article-content">
+
         {{ content }}
+
     </div>
 
 </article>
 
 
 {% if page.toc %}
+
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const content = document.querySelector(".article-content");
@@ -53,16 +119,21 @@ document.addEventListener("DOMContentLoaded", function () {
         heading.id = id;
 
         const li = document.createElement("li");
+
         const link = document.createElement("a");
 
         link.href = "#" + id;
+
         link.textContent = heading.textContent;
 
         li.appendChild(link);
+
         toc.appendChild(li);
 
     });
 
 });
+
 </script>
+
 {% endif %}
